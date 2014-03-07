@@ -1,16 +1,19 @@
 <?php
+session_start();
+ini_set("display_errors","On");
+error_reporting(E_ALL);
 
 require 'instagram.class.php';
 
 // initialize class
 $instagram = new Instagram(array(
-  'apiKey'      => 'YOUR_APP_KEY',
-  'apiSecret'   => 'YOUR_APP_SECRET',
-  'apiCallback' => 'YOUR_APP_CALLBACK' // must point to success.php
+  'apiKey'      => '917de3612ab7400584f195615e61614a',
+  'apiSecret'   => '5bdde86f3bd742449d04572f9b27d8b7',
+  'apiCallback' => 'http://dev.captura.com/salva_token.php' // must point to success.php
 ));
 
 // create login URL
-$loginUrl = $instagram->getLoginUrl();
+$loginUrl = $instagram->getLoginUrl(array('comments','relationships','likes','basic'));
 
 ?>
 
@@ -39,14 +42,18 @@ $loginUrl = $instagram->getLoginUrl();
         <ul class="grid">
           <li><img src="assets/instagram-big.png" alt="Instagram logo"></li>
           <li>
-            <a class="login" href="<? echo $loginUrl ?>">» Login with Instagram</a>
-            <h>Use your Instagram account to login.</h4>
+            
+            <?php if(!isset($_SESSION['token'])){ ?>
+              <a class="login" href="<? echo $loginUrl ?>">» Login com Instagram</a>
+              <h>Use seu instagram para logar.</h4>
+            <?php }else{ ?>
+              Você está logado como <?=$_SESSION['user']['full_name']?><br>
+              Escolha uma ação: <br>
+              <p><a href='busca_segue.php'>Buscar user</a></p>
+            <?php } ?>
+
           </li>
         </ul>
-        <!-- GitHub project -->
-        <footer>
-          <p>created by <a href="https://github.com/cosenary/Instagram-PHP-API">cosenary's Instagram class</a>, available on GitHub</p>
-        </footer>
       </div>
     </div>
   </body>
