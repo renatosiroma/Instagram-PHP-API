@@ -42,14 +42,15 @@ $loginUrl = $instagram->getLoginUrl(array('comments','relationships','likes','ba
         <ul class="grid">
           <li><img src="assets/instagram-big.png" alt="Instagram logo"></li>
           <li>
-            
+
             <?php if(!isset($_SESSION['token'])){ ?>
               <a class="login" href="<? echo $loginUrl ?>">» Login com Instagram</a>
               <h>Use seu instagram para logar.</h4>
             <?php }else{ ?>
               Você está logado como <?=$_SESSION['user']['full_name']?><br>
               Escolha uma ação: <br>
-              <p><a href='busca_segue.php'>Buscar user</a></p>
+              <h2><a href='busca_segue.php'>> Buscar user</a></h2>
+              <h2><a href='processa_tag.php'>> Processar TAG</a></h2>
             <?php } ?>
 
           </li>

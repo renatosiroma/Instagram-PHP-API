@@ -35,7 +35,7 @@ if (isset($code)) {
     $instagram->setAccessToken($_SESSION['token']);
   }
   
-  header("Location: busca_segue.php");
+  header("Location: index.php");
 
 } else {
 
